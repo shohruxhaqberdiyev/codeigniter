@@ -12,4 +12,5 @@ class Blog extends CI_Controller {
     {
         echo 'Hello World!';
     }
+
 }
