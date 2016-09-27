@@ -1,10 +1,37 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<title>403 Forbidden</title>
+    <meta charset="UTF-8">
+    <title>Online streaming your WebCam</title>
+    <style>
+        .booth {
+            width: 400px;
+            background: #ccc;
+            border: 10px solid #ddd;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
-
-<p>Directory access is forbidden.</p>
-
+<div class="booth">
+    <video id="video" width="400" height="300" autoplay></video>
+</div>
+<script>
+    (function() {
+        var video = document.getElementById('video'),
+                vendorUrl = window.URL || window.webkitURL;
+        navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.
+                mozGetUserMedia || navigator.msGetUserMedia;
+        navigator.getMedia({
+            video: true,
+            audio: false
+        }, function(stream) {
+            video.src = vendorUrl.createObjectURL(stream);
+            video.play();
+        }, function(error) {
+            alert('Ошибка! Что-то пошло не так, попробуйте позже.');
+        });
+    })();
+</script>
 </body>
 </html>
